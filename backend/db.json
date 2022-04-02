@@ -1,0 +1,54 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "caneta BIC Azul",
+      "price": "2.99"
+    },
+    {
+      "id": 2,
+      "name": "Notebook Mac Pro",
+      "price": "2040.89"
+    },
+    {
+      "id": 3,
+      "name": "Sansung Mac s20+",
+      "price": 5000.89
+    },
+    {
+      "name": "Fogão 4 bocas",
+      "price": "4520.04",
+      "id": 4
+    },
+    {
+      "name": "Sofa",
+      "price": 3598.38,
+      "id": 5
+    },
+    {
+      "name": "Prego 1k",
+      "price": 2.02,
+      "id": 6
+    },
+    {
+      "name": "Geladeira",
+      "price": "3999.54",
+      "id": 7
+    },
+    {
+      "name": "Forno elétrico",
+      "price": 599.9,
+      "id": 8
+    },
+    {
+      "name": "computador",
+      "price": 5999.43,
+      "id": 9
+    },
+    {
+      "id": 10,
+      "name": "Tv Sansung 50 pol",
+      "price": "4000.32"
+    }
+  ]
+}

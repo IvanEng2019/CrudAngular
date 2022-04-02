@@ -1,0 +1,54 @@
+Cria pasta do projeto e dentro pasta backend
+
+Dentro de backend no terminal:
+npm init -y
+npm i json-server
+
+cria o banco db.json:
+{
+    "products":[
+        {
+            "id":1,
+            "name": "caneta BIC preta",
+            "prince": 5.89
+        },
+        {
+            "id":2,
+            "name": "Notebook Mac Pro",
+            "prince": 12000.89
+        },
+        {
+            "id":3,
+            "name": "Sansung Mac s20+",
+            "prince": 5000.89
+        }
+    ]
+
+}
+
+em package.json alterar:
+"scripts": {
+      "start" :"json-server --watch db.json --port 3001" 
+    },
+
+testando no terminal: npm start
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
