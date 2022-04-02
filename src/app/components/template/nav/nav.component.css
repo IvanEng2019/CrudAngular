@@ -1,0 +1,26 @@
+/*https://fonts.google.com/icons?selected=Material+Icons*/
+
+.container{
+  /* background-color:rgb(15, 0, 15);*/
+    background-color: rgb(207, 177, 218);
+}
+
+.sidenav{
+    background-color:rgb(15, 0, 15);
+    width: 200px;
+}
+
+.sidenav a{
+    color:#fff;
+}
+
+.sidenav i{
+    padding-right: 10px;
+}
+
+.content {
+    padding: 6px;
+    background-color: rgb(207, 177, 218);
+    color:#fff;
+}
+

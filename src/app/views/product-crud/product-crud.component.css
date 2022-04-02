@@ -1,0 +1,10 @@
+div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+button{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}

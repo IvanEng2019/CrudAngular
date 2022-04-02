@@ -1,0 +1,247 @@
+Dentro do projeto (da mesma pasta que se encontra o backend)
+->npm i -g @angular/cli
+->ng new frontend --minimal
+rota: sim - enter em CSS
+
+Entrar frontend:
+npm start
+
+em angular.json para ter arivo csll e html sepados:
+
+ "@schematics/angular:component": {
+          "inlineTemplate":false,
+          "inlineStyle": false,
+          "skipTests": true
+        },
+
+para separar o html:
+em app.component.ts mude:
+@Component({
+  selector: 'app-root',
+  templateUrl:'app.component.html'
+})
+export class AppComponent {
+
+}
+crie arquivo:app.component.html
+parar servidor.
+
+->ng add @angular/material
+escolher a melhor cor
+Aplique global - yes
+Animations - yes
+
+implementar cabeçario:
+ng g c components/template/header
+
+em app.component.html
+<app-header></app-header>
+
+em app.module.ts:
+import {MatToolbarModule} from '@angular/material/toolbar';
+incluir em imports: [...
+MatToolbarModule,
+
+trabalhar com os header.components.csll e header.html
+
+implementar rodape:
+ng g c components/template/footer
+
+em app.component.html
+<app-header></app-header>
+<app-footer></app-footer>
+trabalhar com os footer.components.csll e footer.html
+
+implementar navegação:
+ng g c components/template/nav
+
+em app.module.ts:
+import { MatSidernavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+
+ imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatSidernavModule,
+    MatListModule
+  ],
+
+ng g c views/home
+em app.module.ts       
+import { MatCardModule } from '@angular/material/card';
+em imports...MatCardModule,
+
+em nav.component.html
+<mat-sidenav-content class="content">
+       <app-home></app-home>
+</mat-sidenav-content>
+
+ng g c views/product-crud
+
+em app-routing.module.ts:
+
+import {HomeComponent} from './views/home/home.component';
+import {ProductCrudComponent} from './views/product-crud/product-crud.component';
+
+const routes: Routes = [
+{
+    path: "",
+    component: HomeComponent
+},
+{
+    path: "/products",
+    component: ProductCrudComponent
+}
+];
+
+en navcomponent.html:
+  <i class="material-icons" routerLink="/">
+  <i class="material-icons" routerLink="/products">
+
+-----------------------------------------------------------
+Aprender sobre diretivas:
+
+criar diretiva de atributo: para cor:
+ng g d directives/color
+constructor(private el: ElementRef) {
+    el.nativeElement.style.color = "rgb(177, 104, 177)"
+}
+verificar se foi importado e declarada no app.module.ts
+
+criar diretiva estrututural:
+ng g d directives/for
+na diretiva:
+import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+
+@Directive({
+  selector: '[myFor]'
+})
+export class ForDirective implements OnInit {
+
+  @Input("myForEm")  numbers: number[] = [];
+
+  constructor(
+    private container: ViewContainerRef,  
+    private template: TemplateRef<any>
+   ) { }
+
+   ngOnInit(): void {
+     for (let number of  this.numbers){
+        this.container.createEmbeddedView(
+          this.template, {$implicit: number});
+     }
+       /*console.log(this.numbers)*/
+   }
+
+
+no html:
+ <ul>
+        <li *myFor="let n em [1, 2, 3]">{{n}}</li>
+ </ul>
+
+--------------------------------------------------------
+
+ng g g c components/product/product-create
+baixar auto import
+em app-routing.module.ts acrescentar
+{
+    path: "products/create",
+    component: ProductCreateComponent
+}
+
+em app.module.ts:
+import { MatButtonModule } from '@angular/material/button';
+no emports do app.module.ts: MatButtonModule,
+
+rota em product-crud.component.ts: injeção de dependencia:
+import {Router} from '@angular/router';
+...
+export class ProductCrudComponent implements OnInit {
+
+  constructor(
+      private router: Router
+    ) { }
+
+  ngOnInit(): void {  }
+
+  navigateToProductCreate():void{
+       this.router.navigate(['/products/create'])
+  }
+no html:
+<button mat-raised-button (click)="navigateToProductCreate()" >
+        Novo produto    
+</button>
+
+criar classe de modelo
+na pasta product crie o arquivo product.model.ts:
+export interface Product{
+    id?: number
+    name: string
+    price: number
+}
+
+parte logica de backend deve colocar no service (serviços http, td que nao for componete/visual)
+criar o service: realiza as requisições
+ng g s components/product/product
+no product.serice.ts
+import { Injectable } from '@angular/core';
+import { MatSnackBar} from '@angular/material/snack-bar';
+
+@Injectable({
+  providedIn: 'root'
+})
+
+export class ProductService {
+
+  constructor(
+    private snackBar: MatSnackBar
+  ) { }
+
+  showMessage(msg: string): void{
+    this.snackBar.open(msg, 'Close', { 
+      duration: 5000,
+      horizontalPosition: "center",
+      verticalPosition:"top",
+    })
+  }
+}
+
+no product-create.compont.html
+
+<button mat-raised-button (click)="createProduct()"  color="primary">
+    Salvar
+</button>
+
+<button mat-raised-button (click)="cancel()"  color="primary">
+    Cancelar
+</button>
+
+no app.module.ts
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+ imports: [
+    ...
+    MatButtonModule,
+    MatSnackBarModule,
+  ],
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
